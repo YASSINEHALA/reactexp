@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Card, CardBody, CardTitle, CardText, CardImg } from "reactstrap";
+import { User } from "../User/User";
 
 export const Users = () => {
   const [results, setResults] = useState([]);
@@ -21,6 +22,7 @@ export const Users = () => {
         flexWrap: "wrap"
       }}
     >
+      {results[0] && <User user={results[0]} />}
       {results.map(result => (
         <Card
           key={result.login.uuid}
