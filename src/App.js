@@ -2,7 +2,7 @@ import React from "react";
 import logo from "./logo.svg";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./App.css";
-import { Users } from "./Users/Users";
+import { RandomUsers } from "./RandomUsers/RandomUsers";
 
 function App() {
   return (
@@ -20,7 +20,7 @@ function App() {
         >
           Learn React
         </a>
-        <Users />
+        <RandomUsers />
       </header>
     </div>
   );

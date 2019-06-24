@@ -1,14 +1,15 @@
 import React, { useEffect, useState } from "react";
 import { Card, CardBody, CardTitle, CardText, CardImg } from "reactstrap";
-import { User } from "../User/User";
+import { Link } from "react-router-dom";
 
 export const Users = () => {
-  const [results, setResults] = useState([]);
+  const [users, setUsers] = useState([]);
+
   useEffect(() => {
     async function getUsers() {
       const reponse = await fetch("https://randomuser.me/api/?results=10");
       const data = await reponse.json();
-      setResults(data.results);
+      setUsers(data.results);
     }
 
     getUsers();
@@ -22,26 +23,24 @@ export const Users = () => {
         flexWrap: "wrap"
       }}
     >
-      {results[0] && <User user={results[0]} />}
-      {results.map(result => (
+      {users.map(user => (
         <Card
-          key={result.login.uuid}
+          key={user.login.uuid}
           style={{ color: "black", margin: "20px", width: "250px" }}
+          tag={Link}
+          to={{
+            pathname: "/user",
+            state: { user: user }
+          }}
         >
-          <CardImg
-            top
-            width="100%"
-            src={result.picture.large}
-            alt={result.cell}
-          />
+          <CardImg top width="100%" src={user.picture.large} alt={user.cell} />
           <CardBody>
             <CardTitle>
-              {result.name.title} {result.name.first} {result.name.last}
+              {user.name.first} {user.name.last}
             </CardTitle>
-            <CardText>{result.email}</CardText>
             <CardText>
               <small className="text-muted">
-                Registered on {result.registered.date}
+                Registered on {user.registered.date}
               </small>
             </CardText>
           </CardBody>
